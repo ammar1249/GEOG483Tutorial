@@ -17,7 +17,7 @@
             margin: 0;
         }
         </style>
-        <title></title>
+        <title>GEOG483 Tutorial - Assignment #1</title>
     </head>
     <body>
         <div id="map">
@@ -62,9 +62,11 @@
             worldCopyJump: false, 
             zoomControl:true, maxZoom:28, minZoom:13
         }).fitBounds([[43.58432752578088,-79.68011825229833],[43.586602240889725,-79.67593554723616]]);
+		// Added a 'panTo' option to make sure map is centered on the content.
+		map.panTo(new L.LatLng(43.586803,-79.675700));
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+		var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
@@ -90,9 +92,6 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2"><strong>OSM ID</strong><br />' + (feature.properties['osm_way_id'] !== null ? autolinker.link(feature.properties['osm_way_id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                     <tr>\
                         <td colspan="2"><strong>Name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -195,9 +194,6 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>OSM_ID</strong><br />' + (feature.properties['osm_id'] !== null ? autolinker.link(feature.properties['osm_id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2"><strong>Name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -207,7 +203,7 @@
                         <td colspan="2"><strong>Type</strong><br />' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 800});
         }
 
         function style_Lines_1_0(feature) {
@@ -309,11 +305,8 @@
                     <tr>\
                         <td colspan="2"><strong>Name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>Other Tags</strong><br />' + (feature.properties['other_tags'] !== null ? autolinker.link(feature.properties['other_tags'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 800});
         }
 
         function style_Points_2_0(feature) {
